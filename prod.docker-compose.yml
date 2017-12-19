@@ -1,0 +1,9 @@
+version: '2.2'
+services:
+  gallerit:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: gallerit
+    ports:
+      - "80:80"
