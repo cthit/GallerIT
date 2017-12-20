@@ -1,6 +1,11 @@
 <template>
-  <div class="hello">
-    <h1>ImageList</h1>
+  <div>
+    <h1>{{$route.params.album_id}}</h1>
+    <ul>
+      <li v-for="image in images">
+        {{ image }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -10,7 +15,14 @@ export default {
   data () {
     return {
       msg: 'ssss',
-      number: 123
+      number: 123,
+      images: [
+        1,
+        2, 
+        3,
+        5,
+        6
+      ]
     }
   }
 }
@@ -18,18 +30,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
