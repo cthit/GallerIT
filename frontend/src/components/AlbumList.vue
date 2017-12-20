@@ -3,8 +3,8 @@
     <h1>GallerIT</h1>
     <ul>
       <li v-for="album in albums">
-        <router-link :to="{ name: 'Album', params: { album_id: album }}">
-          {{album}}
+        <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
+          <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
       </li>
     </ul>
@@ -12,23 +12,34 @@
 </template>
 
 <script>
+import AlbumThumbnail from '@/components/AlbumThumbnail'
+
 export default {
   name: 'AlbumList',
   data () {
     return {
       albums: [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10
+        {
+          id: 1,
+          name: 'roligt namn'
+        },
+        {
+          id: 2,
+          name: 'himmelskt namn'
+        },
+        {
+          id: 3,
+          name: 'tråkigt namn'
+        },
+        {
+          id: 4,
+          name: 'fasansfullt namn'
+        }
       ]
     }
+  },
+  components: {
+    AlbumThumbnail
   }
 }
 </script>
