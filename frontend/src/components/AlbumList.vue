@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>GallerIT</h1>
     <ul>
       <li v-for="album in albums">
