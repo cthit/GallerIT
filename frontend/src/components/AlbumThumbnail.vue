@@ -1,18 +1,13 @@
 <template>
   <div>
-    {{name}}
+    {{title}}
   </div>
 </template>
 
 <script>
 export default {
   name: 'AlbumThumbnail',
-  data () {
-    return {
-      name_old: 'A funny album'
-    }
-  },
-  props: ['id', 'name']
+  props: ['title']
 }
 </script>
 

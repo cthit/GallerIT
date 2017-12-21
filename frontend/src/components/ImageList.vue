@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>{{$route.params.album_id}}</h1>
+    <h1>{{album_title}}</h1>
     <ul>
-      <li v-for="image in images">
-        {{ image }}
+      <li v-for="(image, key) in images">
+        Photographer: {{ image.photographer }}
       </li>
     </ul>
   </div>
@@ -12,17 +12,12 @@
 <script>
 export default {
   name: 'ImageList',
-  data () {
-    return {
-      msg: 'ssss',
-      number: 123,
-      images: [
-        1,
-        2,
-        3,
-        5,
-        6
-      ]
+  computed: {
+    album_title () {
+      return this.$store.state.albums[this.$route.params.album_id].title
+    },
+    images () {
+      return this.$store.state.albums[this.$route.params.album_id].images
     }
   }
 }

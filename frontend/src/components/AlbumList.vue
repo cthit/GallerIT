@@ -2,8 +2,8 @@
   <div>
     <h1>GallerIT</h1>
     <ul>
-      <li v-for="album in albums">
-        <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
+      <li v-for="(album, key) in albums">
+        <router-link :to="{ name: 'Album', params: { album_id: key }}">
           <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
       </li>
@@ -16,30 +16,13 @@ import AlbumThumbnail from '@/components/AlbumThumbnail'
 
 export default {
   name: 'AlbumList',
-  data () {
-    return {
-      albums: [
-        {
-          id: 1,
-          name: 'roligt namn'
-        },
-        {
-          id: 2,
-          name: 'himmelskt namn'
-        },
-        {
-          id: 3,
-          name: 'tråkigt namn'
-        },
-        {
-          id: 4,
-          name: 'fasansfullt namn'
-        }
-      ]
-    }
-  },
   components: {
     AlbumThumbnail
+  },
+  computed: {
+    albums () {
+      return this.$store.state.albums
+    }
   }
 }
 </script>
