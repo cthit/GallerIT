@@ -6,12 +6,17 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>{{album_title}}</h1>
+    <!-- Lazy loading of image -->
+    <img v-lazy="image.picture_url"/>
     <h2>Taken by: {{image.photographer}}</h2>
   </div>
 </template>
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+img {
+  width: 100%;
+}
 </style>
 
 <!-- Scripts specific to this component

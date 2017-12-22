@@ -9,6 +9,8 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
     <ul>
       <li v-for="(image, key) in album.images">
         <router-link :to="{ name: 'Image', params: { album_id: album_id, image_id: key }}">
+          <!-- Lazy loading of thumnail image -->
+          <img v-lazy="image.thumbnail_url"/>
           Photographer: {{ image.photographer }}
         </router-link>
       </li>
@@ -18,6 +20,10 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+img {
+  width: 300px;
+  height: 225px;
+}
 </style>
 
 <!-- Scripts specific to this component

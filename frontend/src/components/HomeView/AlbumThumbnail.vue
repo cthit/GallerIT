@@ -4,13 +4,20 @@ Variables can be used as {{ variable }}
 For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
-  <div>
+  <!-- Lazy loading of thumnail image --> 
+  <div class="root" v-lazy:background-image="thumbnail_url">
     {{title}}
   </div>
 </template>
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+.root {
+  /* 4:3 aspect ratio*/
+  width: 300px;
+  height: 225px;
+  background-size: contain;
+}
 </style>
 
 <!-- Scripts specific to this component
