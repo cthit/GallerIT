@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AlbumView from '@/components/AlbumView'
-import ImageView from '@/components/ImageView'
 import HomeView from '@/components/HomeView'
+
+// Lazy loading of modules
+const AlbumView = () => import('@/components/AlbumView')
+const ImageView = () => import('@/components/ImageView')
 
 Vue.use(Router)
 
