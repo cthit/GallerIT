@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ImageList from '@/components/ImageList'
-import ImageMeta from '@/components/ImageMeta'
-import AlbumList from '@/components/AlbumList'
+import AlbumView from '@/components/AlbumView'
+import ImageView from '@/components/ImageView'
+import HomeView from '@/components/HomeView'
 
 Vue.use(Router)
 
@@ -11,17 +11,17 @@ export default new Router({
     {
       path: '/album',
       name: 'Home',
-      component: AlbumList
+      component: HomeView
     },
     {
       path: '/album/:album_id',
       name: 'Album',
-      component: ImageList
+      component: AlbumView
     },
     {
       path: '/album/:album_id/image/:image_id',
       name: 'Image',
-      component: ImageMeta
+      component: ImageView
     },
     {
       path: '/',

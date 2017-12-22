@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import AlbumThumbnail from '@/components/AlbumThumbnail'
+import AlbumThumbnail from '@/components/HomeView/AlbumThumbnail'
 
 export default {
-  name: 'AlbumList',
+  name: 'HomeView',
   components: {
     AlbumThumbnail
   },

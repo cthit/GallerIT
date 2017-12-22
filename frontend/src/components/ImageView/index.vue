@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'ImageMeta',
+  name: 'ImageView',
   computed: {
     album_title () {
       return this.$store.state.albums[this.$route.params.album_id].title

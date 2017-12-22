@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'ImageList',
+  name: 'AlbumView',
   computed: {
     album_title () {
       return this.$store.state.albums[this.$route.params.album_id].title
