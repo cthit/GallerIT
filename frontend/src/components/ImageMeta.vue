@@ -1,16 +1,22 @@
 <template>
-  <div class="hello">
-    <h1>ImageMeta</h1>
+  <div>
+    <h1>{{album_title}}</h1>
+    <h2>Taken by: {{image.photographer}}</h2>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ImageMeta',
-  data () {
-    return {
-      msg: 'ssss',
-      number: 123
+  computed: {
+    album_title () {
+      return this.$store.state.albums[this.$route.params.album_id].title
+    },
+    image_id () {
+      return this.$route.params.image_id
+    },
+    image () {
+      return this.$store.state.albums[this.$route.params.album_id].images[this.$route.params.image_id]
     }
   }
 }
@@ -18,18 +24,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
