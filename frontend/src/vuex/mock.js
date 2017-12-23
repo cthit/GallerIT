@@ -1,9 +1,10 @@
 // Mock data
-const _albums = {}
+const _albums = []
 for (var i = 15 - 1; i >= 0; i--) {
-  var _images = {}
+  var _images = []
   for (var j = 120 - 1; j >= 0; j--) {
     _images[j] = {
+      id: j.toString(),
       picture_url: 'https://dig.it/somepicture',
       thumbnail_url: 'https://dig.it/somepicturethumbnail',
       photographer: ('someoneof' + i) + j,
@@ -13,6 +14,7 @@ for (var i = 15 - 1; i >= 0; i--) {
   }
 
   _albums[i] = {
+    id: i.toString(),
     title: 'A Funny Title' + i,
     thumbnail_url: 'https://dig.it/somethumbnail',
     size: 4,

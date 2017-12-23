@@ -7,8 +7,8 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   <div>
     <h1>GallerIT</h1>
     <transition-group name="animated-list" tag="ul">
-      <li v-for="(album, key) in albums" class="animated-list.item" v-bind:key="key">
-        <router-link :to="{ name: 'Album', params: { album_id: key }}">
+      <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
+        <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
           <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
       </li>
@@ -22,20 +22,20 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- Scripts specific to this component
   Currently (useful) exposed variables by this script:
-    albums: Array of albums indexed with id
-      id: Int id of image
-        album: album Object of this album
-          title: String title of the album
-          size: Int number of images in this album
-          timestamp: Int unix time
-          images: Array of images indexed with id, MAY NOT HAVE BEEN POPULATED!!
-            id: Int id of image
-              image: image Object
-                picture_url: String url to full size image
-                thumbnail_url: String url to thumnail of image
-                photographer: String name
-                editor: String name
-                timestamp: Int unix time
+    albums: Array of albums
+      album: album Object of this album
+        id: String id of album
+        title: String title of the album
+        size: Int number of images in this album
+        timestamp: Int unix time
+        images: Array of images, MAY NOT HAVE BEEN POPULATED!!
+          image: image Object
+            id: String id of image
+            picture_url: String url to full size image
+            thumbnail_url: String url to thumnail of image
+            photographer: String name
+            editor: String name
+            timestamp: Int unix time
 -->
 <script>
 import AlbumThumbnail from '@/components/HomeView/AlbumThumbnail'
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     albums () {
-      return this.$store.state.albums
+      return this.$store.getters.getAlbums
     }
   }
 }

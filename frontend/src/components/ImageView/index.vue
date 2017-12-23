@@ -22,8 +22,8 @@ img {
 <!-- Scripts specific to this component
   Currently (useful) exposed variables by this script:
     album_title: String title of the album containing this picture
-    image_id: Int id of this image
     image: image Object of this image
+      id: String id of this image
       picture_url: String url to full size image
       photographer: String name
       editor: String name
@@ -34,13 +34,10 @@ export default {
   name: 'ImageView',
   computed: {
     album_title () {
-      return this.$store.state.albums[this.$route.params.album_id].title
-    },
-    image_id () {
-      return this.$route.params.image_id
+      return this.$store.getters.getAlbum(this.$route.params.album_id).title
     },
     image () {
-      return this.$store.state.albums[this.$route.params.album_id].images[this.$route.params.image_id]
+      return this.$store.getters.getImage(this.$route.params.album_id, this.$route.params.image_id)
     }
   }
 }
