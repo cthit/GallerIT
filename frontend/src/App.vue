@@ -11,6 +11,22 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css global styling for the app -->
 <style lang="scss">
+
+/*
+ *   Transition animation for animated list
+ *     Use by wrapping list with:
+ *       <transition-group name="animated-list" tag="ul"> Some list items </transition-group>  (ul can be replaced with arbitary html tag)
+       and tag all list items with the class "animated-list-item" respectively give them a unique id with v-bind:key="SomeId"
+ */
+.animated-list-item {
+  transition: all 1s;
+}
+.animated-list, .animated-list-leave-to {
+  opacity: 0;
+}
+.animated-list-leave-active {
+  position: absolute;
+}
 </style>
 
 <!-- Scripts specific to this component

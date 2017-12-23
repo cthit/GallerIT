@@ -6,13 +6,13 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>GallerIT</h1>
-    <ul>
-      <li v-for="(album, key) in albums">
+    <transition-group name="animated-list" tag="ul">
+      <li v-for="(album, key) in albums" class="animated-list.item" v-bind:key="key">
         <router-link :to="{ name: 'Album', params: { album_id: key }}">
           <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 

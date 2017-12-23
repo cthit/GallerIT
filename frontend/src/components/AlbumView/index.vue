@@ -6,15 +6,15 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>{{album.title}}</h1>
-    <ul>
-      <li v-for="(image, key) in album.images">
+    <transition-group name="animated-list" tag="ul">
+      <li v-for="(image, key) in album.images" class="animated-list-item" v-bind:key="key">
         <router-link :to="{ name: 'Image', params: { album_id: album_id, image_id: key }}">
           <!-- Lazy loading of thumnail image -->
           <img v-lazy="image.thumbnail_url"/>
           Photographer: {{ image.photographer }}
         </router-link>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -24,6 +24,8 @@ img {
   width: 300px;
   height: 225px;
 }
+
+
 </style>
 
 <!-- Scripts specific to this component
@@ -43,6 +45,8 @@ img {
             timestamp: Int unix time
 -->
 <script>
+import Vue from 'vue'
+var counter = 1
 export default {
   name: 'AlbumView',
   computed: {
