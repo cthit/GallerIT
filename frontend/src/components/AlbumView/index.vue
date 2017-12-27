@@ -7,7 +7,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   <div>
     <h1>{{album.title}}</h1>
     <transition-group name="animated-list" tag="ul">
-      <li v-for="image in album.images" class="animated-list-item" v-bind:key="image.id">
+      <li v-for="image in sortedImages" class="animated-list-item" v-bind:key="image.id">
         <router-link :to="{ name: 'Image', params: { album_id: album.id, image_id: image.id }}">
           <!-- Lazy loading of thumnail image -->
           <img v-lazy="image.thumbnail_url"/>
@@ -33,7 +33,7 @@ img {
       title: String title of the album
       size: Int number of images in this album
       timestamp: Int unix time
-      images: Array of images
+      images: Array of images (UNSORTED)
         image: image Object
           id: String id of image
           picture_url: String url to full size image
@@ -41,6 +41,8 @@ img {
           photographer: String name
           editor: String name
           timestamp: Int unix time
+    sortedImages: a sorted list of images
+      (see above for properties)
 -->
 <script>
 export default {
@@ -48,6 +50,9 @@ export default {
   computed: {
     album () {
       return this.$store.getters.getAlbum(this.$route.params.album_id)
+    },
+    sortedImages () {
+      return this.$store.getters.getImages(this.$route.params.album_id).sort((a, b) => b.timestamp - a.timestamp)
     }
   }
 }

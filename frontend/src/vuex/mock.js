@@ -9,7 +9,7 @@ for (var i = 15 - 1; i >= 0; i--) {
       thumbnail_url: 'https://dig.it/somepicturethumbnail',
       photographer: ('someoneof' + i) + j,
       editor: 'someone',
-      timestamp: 1324
+      timestamp: 1324 + j
     }
   }
 
@@ -18,7 +18,7 @@ for (var i = 15 - 1; i >= 0; i--) {
     title: 'A Funny Title' + i,
     thumbnail_url: 'https://dig.it/somethumbnail',
     size: 4,
-    timestamp: 111,
+    timestamp: 111 + i,
     images: _images
   }
 }

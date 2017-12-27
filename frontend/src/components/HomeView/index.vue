@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     albums () {
-      return this.$store.getters.getAlbums
+      return this.$store.getters.getAlbums.sort((a, b) => b.timestamp - a.timestamp)
     }
   }
 }
