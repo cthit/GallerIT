@@ -2,10 +2,10 @@ version: '2.2'
 services:
   gallerit:
     build:
-      context: ./frontend
+      context: .
       dockerfile: dev.Dockerfile
     image: gallerit:dev
     ports:
       - 8080:8080
     volumes:
-      - ./frontend:/app
+      - .:/app
