@@ -22,6 +22,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- Scripts specific to this component
   Currently (useful) exposed variables by this script:
+    id: Int id of album
     title: String title of the album
     thumbnail_url: String url to thumbnail for album
     size: Int number of images in the album
@@ -34,7 +35,8 @@ export default {
     'title',
     'thumbnail_url',
     'size',
-    'timestamp'
+    'timestamp',
+    'id'
   ]
 }
 </script>

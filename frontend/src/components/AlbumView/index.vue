@@ -29,17 +29,16 @@ img {
 <!-- Scripts specific to this component
   Currently (useful) exposed variables by this script:
     album: album Object of this album
-      id: String id of this album
+      id: Int id of this album
       title: String title of the album
       size: Int number of images in this album
       timestamp: Int unix time
       images: Array of images (UNSORTED)
         image: image Object
-          id: String id of image
+          id: Int id of image
           picture_url: String url to full size image
           thumbnail_url: String url to thumnail of image
           photographer: String name
-          editor: String name
           timestamp: Int unix time
     sortedImages: a sorted list of images
       (see above for properties)

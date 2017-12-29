@@ -23,10 +23,9 @@ img {
   Currently (useful) exposed variables by this script:
     album_title: String title of the album containing this picture
     image: image Object of this image
-      id: String id of this image
+      id: Int id of this image
       picture_url: String url to full size image
       photographer: String name
-      editor: String name
       timestamp: Int unix time
 -->
 <script>

@@ -24,17 +24,16 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   Currently (useful) exposed variables by this script:
     albums: Array of albums
       album: album Object of this album
-        id: String id of album
+        id: Int id of album
         title: String title of the album
         size: Int number of images in this album
         timestamp: Int unix time
-        images: Array of images, MAY NOT HAVE BEEN POPULATED!!
+        images: Array of images, MAY NOT HAVE BEEN POPULATED!! Unsorted
           image: image Object
-            id: String id of image
+            id: Int id of image
             picture_url: String url to full size image
             thumbnail_url: String url to thumnail of image
             photographer: String name
-            editor: String name
             timestamp: Int unix time
 -->
 <script>
