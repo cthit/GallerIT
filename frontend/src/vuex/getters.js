@@ -1,5 +1,5 @@
 // Vuex getters
-const _getters = {
+const getters = {
   getAlbum: (state) => (id) => {
     return state.albums.find(album => album.id === id)
   },
@@ -13,4 +13,4 @@ const _getters = {
     return state.albums
   }
 }
-export default _getters
+export default getters

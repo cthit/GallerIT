@@ -1,5 +1,5 @@
 // Vuex actions
-const _actions = {
+const actions = {
   async updateAlbumList (context) {
     // Get list of albums
     // Mutate store
@@ -13,4 +13,4 @@ const _actions = {
     // Mutate store
   }
 }
-export default _actions
+export default actions
