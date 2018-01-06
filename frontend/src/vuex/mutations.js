@@ -1,98 +1,166 @@
-import Vue from 'vue'
+/*
+  As we don't check that a certain data type (album or image) has the id
+  attribute every time we loop trough the state array it's of outermost
+  importance that all data is validated before being added to the global state.
+*/
+
+/*
+  Finds the key of an object if property id in array.
+  -1 is returned if the id wasn't found.
+*/
+function keyOfId (array, id) {
+  for (var i = array.length - 1; i >= 0; i--) {
+    // Does not check that it has id as proerty as every object is validated before it's added
+    if (array[i].id === id) {
+      return i
+    }
+  }
+  return -1
+}
+
+/*
+  Validators for datatypes used by the mutators
+*/
+function validateAlbum (album) {
+  // check that album has id property
+  if (!('id' in album)) {
+    return false
+  }
+
+  // make sure album has a image array
+  if (!('images' in album)) {
+    return false
+  }
+  if (!(Array.isArray(album.images))) {
+    return false
+  }
+
+  // validate all potential images
+  for (var image in album.images) {
+    if (!validateImage(image)) {
+      return false
+    }
+  }
+
+  return true
+}
+function validateImage (image) {
+  // check that image has id property
+  if (!('id' in image)) {
+    return false
+  }
+
+  return true
+}
 
 // Vuex mutations
-const _mutations = {
-  addAlbum (state, payload) { // {id:, album:}
-    if (!state.albums.hasOwnProperty(payload.id)) {
-      Vue.set(state.albums, payload.id, payload.album)
+// REMEMBER! Always validate data before adding! (See top of document)
+const mutations = {
+  addAlbum (state, album) { // album object
+    if (validateAlbum(album)) {
+      if (keyOfId(state.albums, album.id) === -1) {
+        state.albums.push(album)
+      }
     }
   },
-  addAlbums (state, payloads) { // array off {id:, album:}
-    for (var payload in payloads) {
-      if (!state.albums.hasOwnProperty(payload.id)) {
-        Vue.set(state.albums, payload.id, payload.album)
-      }
-    };
+  addAlbums (state, albums) { // array off album objects
+    for (var album in albums) {
+      mutations.addAlbum(state, album)
+    }
   },
-  removeAlbum (state, id) { // id
-    if (state.albums.hasOwnProperty(id)) {
-      Vue.delete(state.albums, id)
+  removeAlbum (state, id) { // id of album
+    var key = keyOfId(state.albums, id)
+    if (key !== -1) {
+      state.albums.splice(key, 1)
     }
   },
   removeAlbums (state, ids) { // array of id
     for (var id in ids) {
-      if (state.albums.hasOwnProperty(id)) {
-        Vue.delete(state.albums, id)
-      }
-    };
-  },
-  updateAlbum (state, payload) { // {id:, album:}
-    if (state.albums.hasOwnProperty(payload.id)) {
-      Vue.set(state.albums, payload.id, payload.album)
+      mutations.removeAlbum(state, id)
     }
   },
-  updateAlbums (state, payloads) { // array off {id:, album:}
-    for (var payload in payloads) {
-      if (state.albums.hasOwnProperty(payload.id)) {
-        Vue.set(state.albums, payload.id, payload.album)
+  updateAlbum (state, album) { // album object
+    if (validateAlbum(album)) {
+      var key = keyOfId(state.albums, album.id)
+      if (key !== -1) {
+        state.albums.splice(key, 1, album)
       }
-    };
+    }
+  },
+  updateAlbums (state, albums) { // array off album objects
+    for (var album in albums) {
+      mutations.updateAlbum(state, album)
+    }
   },
   clearAlbums (state) { // noting
-    Vue.set(state, 'albums', {})
+    state.albums.splice(0, state.albums.length)
   },
-  addImage (state, payload) { // {album_id:, id:, image:}
-    if (state.albums.hasOwnProperty(payload.album_id)) {
-      if (!state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-        Vue.set(state.albums[payload.album_id].images, payload.id, payload.image)
-      }
-    }
-  },
-  addImages (state, payloads) { // array off {album_id:, id:, image:}
-    for (var payload in payloads) {
-      if (state.albums.hasOwnProperty(payload.album_id)) {
-        if (!state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-          Vue.set(state.albums[payload.album_id].images, payload.id, payload.image)
+  addImage (state, payload) { // {album_id:, image:}
+    // Validate payload
+    if ('image' in payload &&
+        validateImage(payload.image) &&
+        'album_id' in payload) {
+      // Find album
+      var albumKey = keyOfId(state.albums, payload.album_id)
+      if (albumKey !== -1) {
+        // Make sure the image doesn't already exist
+        if (keyOfId(state.albums[albumKey].images, payload.image.id) === -1) {
+          state.albums[albumKey].images.push(payload.image)
         }
       }
     }
   },
+  addImages (state, payloads) { // array off {album_id:, image:}
+    for (var payload in payloads) {
+      mutations.addImage(state, payload)
+    }
+  },
   removeImage (state, payload) { // {album_id:, id:}
-    if (state.albums.hasOwnProperty(payload.album_id)) {
-      if (state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-        Vue.delete(state.albums[payload.album_id].images, payload.id)
+    // Validate payload
+    if ('id' in payload &&
+        'album_id' in payload) {
+      // Find album
+      var albumKey = keyOfId(state.albums, payload.album_id)
+      if (albumKey !== -1) {
+        // Remove image
+        var imageKey = keyOfId(state.albums[albumKey].images, payload.id)
+        if (imageKey !== -1) {
+          state.albums[albumKey].images.splice(imageKey, 1)
+        }
       }
     }
   },
   removeImages (state, payloads) { // array off {album_id:, id:}
     for (var payload in payloads) {
-      if (state.albums.hasOwnProperty(payload.album_id)) {
-        if (state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-          Vue.delete(state.albums[payload.album_id].images, payload.id)
+      mutations.removeImage(state, payload)
+    }
+  },
+  updateImage (state, payload) { // {album_id:, image:}
+    // Validate payload
+    if ('image' in payload &&
+        validateImage(payload.image) &&
+        'album_id' in payload) {
+      // Find album
+      var albumKey = keyOfId(state.albums, payload.album_id)
+      if (albumKey !== -1) {
+        // Update image
+        var imageKey = keyOfId(state.albums[albumKey].images, payload.id)
+        if (imageKey !== -1) {
+          state.albums[albumKey].images.splice(imageKey, 1, payload.image)
         }
       }
     }
   },
-  updateImage (state, payload) { // {album_id:, id:, image:}
-    if (state.albums.hasOwnProperty(payload.album_id)) {
-      if (state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-        Vue.set(state.albums[payload.album_id].images, payload.id, payload.image)
-      }
-    }
-  },
-  updateImages (state, payloads) { // array off {album_id:, id:, image:}
+  updateImages (state, payloads) { // array off {album_id:, image:}
     for (var payload in payloads) {
-      if (state.albums.hasOwnProperty(payload.album_id)) {
-        if (state.albums[payload.album_id].images.hasOwnProperty(payload.id)) {
-          Vue.set(state.albums[payload.album_id].images, payload.id, payload.image)
-        }
-      }
+      mutations.updateImage(state, payload)
     }
   },
   clearImages (state, albumId) { // albumId
-    if (state.albums.hasOwnProperty(albumId)) {
-      Vue.set(state.albums[albumId], 'images', {})
+    var key = keyOfId(state.albums, albumId)
+    if (key !== -1) {
+      state.albums[key].images.splice(0, state.albums.length)
     }
   }
 }
-export default _mutations
+export default mutations
