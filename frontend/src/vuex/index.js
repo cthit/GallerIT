@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import _albums from './mock.js'
 import _mutations from './mutations.js'
 import _getters from './getters.js'
 import _actions from './actions.js'
@@ -10,7 +9,7 @@ import _actions from './actions.js'
 Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
-    albums: _albums
+    albums: []
   },
   mutations: _mutations,
   getters: _getters,
