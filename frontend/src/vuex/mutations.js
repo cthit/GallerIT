@@ -36,8 +36,8 @@ function validateAlbum (album) {
   }
 
   // validate all potential images
-  for (var image in album.images) {
-    if (!validateImage(image)) {
+  for (var i = album.images.length - 1; i >= 0; i--) {
+    if (!validateImage(album.images[i])) {
       return false
     }
   }
@@ -64,8 +64,8 @@ const mutations = {
     }
   },
   addAlbums (state, albums) { // array off album objects
-    for (var album in albums) {
-      mutations.addAlbum(state, album)
+    for (var i = albums.length - 1; i >= 0; i--) {
+      mutations.addAlbum(state, albums[i])
     }
   },
   removeAlbum (state, id) { // id of album
@@ -75,8 +75,8 @@ const mutations = {
     }
   },
   removeAlbums (state, ids) { // array of id
-    for (var id in ids) {
-      mutations.removeAlbum(state, id)
+    for (var i = ids.length - 1; i >= 0; i--) {
+      mutations.removeAlbum(state, ids[i])
     }
   },
   updateAlbum (state, album) { // album object
@@ -88,8 +88,8 @@ const mutations = {
     }
   },
   updateAlbums (state, albums) { // array off album objects
-    for (var album in albums) {
-      mutations.updateAlbum(state, album)
+    for (var i = albums.length - 1; i >= 0; i--) {
+      mutations.updateAlbum(state, albums[i])
     }
   },
   clearAlbums (state) { // noting
@@ -111,8 +111,8 @@ const mutations = {
     }
   },
   addImages (state, payloads) { // array off {album_id:, image:}
-    for (var payload in payloads) {
-      mutations.addImage(state, payload)
+    for (var i = payloads.length - 1; i >= 0; i--) {
+      mutations.addImage(state, payloads[i])
     }
   },
   removeImage (state, payload) { // {album_id:, id:}
@@ -131,8 +131,8 @@ const mutations = {
     }
   },
   removeImages (state, payloads) { // array off {album_id:, id:}
-    for (var payload in payloads) {
-      mutations.removeImage(state, payload)
+    for (var i = payloads.length - 1; i >= 0; i--) {
+      mutations.removeImage(state, payloads[1])
     }
   },
   updateImage (state, payload) { // {album_id:, image:}
@@ -152,14 +152,14 @@ const mutations = {
     }
   },
   updateImages (state, payloads) { // array off {album_id:, image:}
-    for (var payload in payloads) {
-      mutations.updateImage(state, payload)
+    for (var i = payloads.length - 1; i >= 0; i--) {
+      mutations.updateImage(state, payloads[i])
     }
   },
   clearImages (state, albumId) { // albumId
     var key = keyOfId(state.albums, albumId)
     if (key !== -1) {
-      state.albums[key].images.splice(0, state.albums.length)
+      state.albums[key].images.splice(0, state.albums[key].images.length)
     }
   }
 }
