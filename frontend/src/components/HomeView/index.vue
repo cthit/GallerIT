@@ -6,6 +6,8 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>GallerIT</h1>
+    <div class="loading" v-if="showLoading">Loading...</div>
+    <div class="error" v-if="showError">{{lastError}}</div>
     <transition-group name="animated-list" tag="ul">
       <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
         <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
@@ -44,10 +46,44 @@ export default {
   components: {
     AlbumThumbnail
   },
+  data () {
+    return {
+      loading: false,
+      lastError: null
+    }
+  },
   computed: {
     albums () {
       return this.$store.getters.getAlbums.sort((a, b) => b.timestamp - a.timestamp)
+    },
+    showLoading () {
+      return this.loading && this.albums.length === 0
+    },
+    showError () {
+      return this.lastError != null
     }
+  },
+  methods: {
+    getData () {
+      if (this.$route.name === 'Home') {
+        this.loading = true
+        this.$store.dispatch('getAlbumList').then((value) => {
+          // Do on sucess
+          this.lastError = null
+          this.loading = false
+        }).catch((reason) => {
+          // Do on fail
+          this.lastError = reason.message
+          setTimeout(this.getData(), 5000)
+        })
+      }
+    }
+  },
+  created () {
+    this.getData()
+  },
+  watch: {
+    '$route': 'getData'
   }
 }
 </script>

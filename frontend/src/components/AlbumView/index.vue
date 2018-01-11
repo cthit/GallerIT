@@ -6,6 +6,8 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>{{album.title}}</h1>
+    <div class="loading" v-if="showLoading">Loading...</div>
+    <div class="error" v-if="showError">{{lastError}}</div>
     <transition-group name="animated-list" tag="ul">
       <li v-for="image in sortedImages" class="animated-list-item" v-bind:key="image.id">
         <router-link :to="{ name: 'Image', params: { album_id: album.id, image_id: image.id }}">
@@ -46,13 +48,47 @@ img {
 <script>
 export default {
   name: 'AlbumView',
+  data () {
+    return {
+      loading: false,
+      lastError: null
+    }
+  },
   computed: {
     album () {
       return this.$store.getters.getAlbum(this.$route.params.album_id)
     },
     sortedImages () {
       return this.$store.getters.getImages(this.$route.params.album_id).sort((a, b) => b.timestamp - a.timestamp)
+    },
+    showLoading () {
+      return this.loading && this.album.images.length === 0
+    },
+    showError () {
+      return this.lastError != null
     }
+  },
+  methods: {
+    getData () {
+      if (this.$route.name === 'Album') {
+        this.loading = true
+        this.$store.dispatch('updateAlbum', this.$route.params.album_id).then((value) => {
+          // Do on sucess
+          this.lastError = null
+          this.loading = false
+        }).catch((reason) => {
+          // Do on fail
+          this.lastError = reason.message
+          setTimeout(this.getData(), 5000)
+        })
+      }
+    }
+  },
+  created () {
+    this.getData()
+  },
+  watch: {
+    '$route': 'getData'
   }
 }
 </script>

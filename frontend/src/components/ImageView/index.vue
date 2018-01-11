@@ -6,6 +6,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <template>
   <div>
     <h1>{{album_title}}</h1>
+    <div class="error" v-if="showError">{{lastError}}</div>
     <!-- Lazy loading of image -->
     <img v-lazy="image.picture_url"/>
     <h2>Taken by: {{image.photographer}}</h2>
@@ -31,13 +32,44 @@ img {
 <script>
 export default {
   name: 'ImageView',
+  data () {
+    return {
+      loading: false,
+      lastError: null
+    }
+  },
   computed: {
     album_title () {
       return this.$store.getters.getAlbum(this.$route.params.album_id).title
     },
     image () {
       return this.$store.getters.getImage(this.$route.params.album_id, this.$route.params.image_id)
+    },
+    showError () {
+      return this.lastError != null
     }
+  },
+  methods: {
+    getData () {
+      if (this.$route.name === 'Image') {
+        this.loading = true
+        this.$store.dispatch('updateImage', {album_id: this.$route.params.album_id, id: this.$route.params.image_id}).then((value) => {
+          // Do on sucess
+          this.lastError = null
+          this.loading = false
+        }).catch((reason) => {
+          // Do on fail
+          this.lastError = reason.message
+          setTimeout(this.getData(), 5000)
+        })
+      }
+    }
+  },
+  created () {
+    this.getData()
+  },
+  watch: {
+    '$route': 'getData'
   }
 }
 </script>
