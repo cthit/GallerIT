@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile
     image: gallerit
     ports:
-      - "80:80"
+      - "3000:80"

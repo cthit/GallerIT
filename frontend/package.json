@@ -13,6 +13,7 @@
   "dependencies": {
     "compression-webpack-plugin": "^1.1.3",
     "vue": "^2.5.2",
+    "vue-awesome": "^2.3.4",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

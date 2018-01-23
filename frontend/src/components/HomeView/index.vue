@@ -5,7 +5,10 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
   <div>
-    <h1>GallerIT</h1>
+    <h1>
+      GallerIT
+      <icon name="picture-o" scale="2" spin></icon>
+    </h1>
     <div class="loading" v-if="showLoading">Loading...</div>
     <div class="error" v-if="showError">{{lastError}}</div>
     <transition-group name="animated-list" tag="ul">
