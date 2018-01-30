@@ -46,6 +46,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
    padding-left: 0px;
    background-color: #e6e6e6;
    box-shadow: 7px 7px #d9d9d9;
+   border-radius: 5px;
  }
 
 </style>

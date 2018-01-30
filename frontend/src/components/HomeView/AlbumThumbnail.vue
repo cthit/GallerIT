@@ -6,13 +6,13 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <template>
   <div class="emptySpace">
-    <!-- Lazy loading of thumnail image --> 
+    <!-- Lazy loading of thumnail image -->
     <div class="root" v-lazy:background-image="thumbnail_url">
       <div class="banner">
         <div class="name">
           {{title}}
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </template>
@@ -20,16 +20,15 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
 .emptySpace {
-  margin-bottom: 30px;
+  margin: 5%;
 }
 .root {
   /* 4:3 aspect ratio*/
   width: 300px;
   height: 225px;
-  background-size: contain;
+  background-size: auto;
 }
 .banner {
-  margin-top: 145px;
   width: 220px;
   height: 40px;
   background-color: #ffb6c1;
