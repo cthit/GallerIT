@@ -12,7 +12,7 @@ Vue.component('icon', Icon)
 
 Vue.use(VueLazyLoad, {
   preLoad: 2,
-  error: 'static/error.png',
+  error: 'static/error.jpg',
   loading: 'static/loading.png',
   attempt: 1
 })
