@@ -5,16 +5,23 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 
 <template>
-  <!-- Lazy loading of thumnail image --> 
-  <div class="root" v-lazy:background-image="thumbnail_url">
-    {{title}}
-    <div class="banner">
-    </div>  
+  <div class="emptySpace">
+    <!-- Lazy loading of thumnail image --> 
+    <div class="root" v-lazy:background-image="thumbnail_url">
+      <div class="banner">
+        <div class="name">
+          {{title}}
+        </div>
+      </div>  
+    </div>
   </div>
 </template>
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+.emptySpace {
+  margin-bottom: 30px;
+}
 .root {
   /* 4:3 aspect ratio*/
   width: 300px;
@@ -22,13 +29,17 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   background-size: contain;
   border-color: #000000;
   border-style: dotted;
-
 }
 .banner {
   margin-top: 145px;
   width: 220px;
   height: 40px;
-  background-color: #000000;
+  background-color: #ffb6c1;
+}
+.name {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: inline-block;
 }
 </style>
 
