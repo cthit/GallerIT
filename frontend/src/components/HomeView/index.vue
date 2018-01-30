@@ -5,7 +5,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
   <div>
-    <h1>
+    <h1 class="center">
       GallerIT
       <icon name="picture-o" scale="2" spin></icon>
     </h1>
@@ -23,6 +23,12 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+ .ul {
+ 
+ }
+ .center {
+  text-align: center;
+ }
 </style>
 
 <!-- Scripts specific to this component
