@@ -8,7 +8,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
     <h1>{{album.title}}</h1>
     <div class="loading" v-if="showLoading">Loading...</div>
     <div class="error" v-if="showError">{{lastError}}</div>
-    <transition-group name="animated-list" tag="ul">
+    <transition-group class="photo-grid" name="animated-list" tag="ul">
       <li v-for="image in sortedImages" class="animated-list-item photo-wrapper" v-bind:key="image.id">
         <div class="content-wrapper">
           <router-link :to="{ name: 'Image', params: { album_id: album.id, image_id: image.id }}">
@@ -31,6 +31,12 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+.photo-grid {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 img {
   width: 100%;
   height: 225px;
@@ -39,6 +45,12 @@ img {
 
 body {
   background-color: #f7f7f7;
+}
+
+.photo-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .photo-description-wrapper {
@@ -65,6 +77,7 @@ body {
 }
 
 .photo-wrapper {
+  display: flex;
   width: 300px;
   float: left;
   list-style-type: none;
@@ -77,25 +90,22 @@ body {
   padding: 15px;
   background-color: white;
   box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
   -webkit-transition: transform 0.1s linear;
 }
 
 .content-wrapper:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.5);
+  animation: cat-click-animation 0.2s 0s 1 linear;
 }
 
 .content-wrapper:active {
-  animation: cat-click-animation 0.15s 0s 1 linear;
 }
 
 @keyframes cat-click-animation {
-  from {
-    transform: rotate(0deg) scale(1.1, 1.1);
-  }
-  to {
-    transform: rotate(360deg) scale(4, 4);
-  }
+  0% { transform: rotate(0deg) scale(1.5); }
+  50% { transform: rotate(30deg) scale(1.5); }
+  100% { transform: rotate(0deg) scale(1.5); }
 }
 
 * {
