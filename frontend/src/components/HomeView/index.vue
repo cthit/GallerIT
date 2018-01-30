@@ -25,6 +25,7 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 <style lang="scss" scoped>
  .center {
   text-align: center;
+  border-radius: 5px;
  }
  .main {
    width: 90%;
@@ -37,10 +38,10 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
    flex-wrap: wrap;
    justify-content: space-around;
    list-style-type: none;
+   padding: -5px;
+   background-color: #09CBBA;
  }
- body {
 
- }
 </style>
 
 <!-- Scripts specific to this component
