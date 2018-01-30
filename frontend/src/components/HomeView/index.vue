@@ -11,12 +11,12 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
     </h1>
     <div class="loading" v-if="showLoading">Loading...</div>
     <div class="error" v-if="showError">{{lastError}}</div>
-    <transition-group name="animated-list" tag="container">
-      <container v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
+    <transition-group name="animated-list" tag="ul">
+      <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
         <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
           <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
-      </container>
+      </li>
     </transition-group>
   </div>
 </template>
@@ -27,13 +27,19 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   text-align: center;
  }
  .main {
-   width: auto;
-   height: auto;
+   width: 90%;
+   height: 90%;
+   margin-left: 5%;
+   margin-right: 5%;
  }
- container {
+ ul {
    display: flex;
    flex-wrap: wrap;
    justify-content: space-around;
+   list-style-type: none;
+ }
+ body {
+
  }
 </style>
 
