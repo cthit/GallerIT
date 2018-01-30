@@ -27,8 +27,6 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   width: 300px;
   height: 225px;
   background-size: contain;
-  border-color: #000000;
-  border-style: dotted;
 }
 .banner {
   margin-top: 145px;

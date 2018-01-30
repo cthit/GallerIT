@@ -4,25 +4,30 @@ Variables can be used as {{ variable }}
 For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
-  <div class="main">
-    <h1 class="center">
-      GallerIT
-      <icon name="picture-o" scale="2" spin></icon>
-    </h1>
-    <div class="loading" v-if="showLoading">Loading...</div>
-    <div class="error" v-if="showError">{{lastError}}</div>
-    <transition-group name="animated-list" tag="ul">
-      <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
-        <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
-          <album-thumbnail v-bind="album"> </album-thumbnail>
-        </router-link>
-      </li>
-    </transition-group>
+  <div class="background">
+    <div class="main">
+      <h1 class="center">
+        GallerIT
+        <icon name="picture-o" scale="2" spin></icon>
+      </h1>
+      <div class="loading" v-if="showLoading">Loading...</div>
+      <div class="error" v-if="showError">{{lastError}}</div>
+      <transition-group name="animated-list" tag="ul">
+        <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
+          <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
+            <album-thumbnail v-bind="album"> </album-thumbnail>
+          </router-link>
+        </li>
+      </transition-group>
+    </div>
   </div>
 </template>
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+.background {
+  background-color: #F7F7F7;
+}
  .center {
   text-align: center;
   border-radius: 5px;
@@ -38,8 +43,9 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
    flex-wrap: wrap;
    justify-content: space-around;
    list-style-type: none;
-   background-color: #09CBBA;
-   padding-left: 5px;
+   padding-left: 0px;
+   background-color: #e6e6e6;
+   box-shadow: 7px 7px #d9d9d9;
  }
 
 </style>
