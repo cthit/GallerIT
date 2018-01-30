@@ -41,10 +41,6 @@ body {
   background-color: #f7f7f7;
 }
 
-img:active {
-  animation: fa-spin 0.1s 0s 1 linear;
-}
-
 .photo-description-wrapper {
   width: 100%;
   height: 45px;
@@ -87,6 +83,19 @@ img:active {
 
 .content-wrapper:hover {
   transform: scale(1.1, 1.1);
+}
+
+.content-wrapper:active {
+  animation: cat-click-animation 0.15s 0s 1 linear;
+}
+
+@keyframes cat-click-animation {
+  from {
+    transform: rotate(0deg) scale(1.1, 1.1);
+  }
+  to {
+    transform: rotate(360deg) scale(4, 4);
+  }
 }
 
 * {
