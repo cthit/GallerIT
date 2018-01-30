@@ -4,7 +4,7 @@ Variables can be used as {{ variable }}
 For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
-  <div>
+  <div class="main">
     <h1 class="center">
       GallerIT
       <icon name="picture-o" scale="2" spin></icon>
@@ -23,11 +23,23 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
- .ul {
- 
- }
  .center {
   text-align: center;
+ }
+ .main {
+   width: 90%;
+   height: 90%;
+   margin-left: 5%;
+   margin-right: 5%;
+ }
+ ul {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   list-style-type: none;
+ }
+ body {
+
  }
 </style>
 
