@@ -3,10 +3,13 @@ Note that there can only be one root element inside the "template" tags
 Variables can be used as {{ variable }}
 For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
+
 <template>
   <!-- Lazy loading of thumnail image --> 
   <div class="root" v-lazy:background-image="thumbnail_url">
     {{title}}
+    <div class="banner">
+    </div>  
   </div>
 </template>
 
@@ -17,6 +20,15 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
   width: 300px;
   height: 225px;
   background-size: contain;
+  border-color: #000000;
+  border-style: dotted;
+
+}
+.banner {
+  margin-top: 145px;
+  width: 220px;
+  height: 40px;
+  background-color: #000000;
 }
 </style>
 
