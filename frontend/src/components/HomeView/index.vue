@@ -4,30 +4,36 @@ Variables can be used as {{ variable }}
 For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
  -->
 <template>
-  <div>
+  <div class="main">
     <h1 class="center">
       GallerIT
       <icon name="picture-o" scale="2" spin></icon>
     </h1>
     <div class="loading" v-if="showLoading">Loading...</div>
     <div class="error" v-if="showError">{{lastError}}</div>
-    <transition-group name="animated-list" tag="ul">
-      <li v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
+    <transition-group name="animated-list" tag="container">
+      <container v-for="album in albums" class="animated-list.item" v-bind:key="album.id">
         <router-link :to="{ name: 'Album', params: { album_id: album.id }}">
           <album-thumbnail v-bind="album"> </album-thumbnail>
         </router-link>
-      </li>
+      </container>
     </transition-group>
   </div>
 </template>
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
- .ul {
- 
- }
  .center {
   text-align: center;
+ }
+ .main {
+   width: auto;
+   height: auto;
+ }
+ container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
  }
 </style>
 
