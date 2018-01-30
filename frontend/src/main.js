@@ -12,7 +12,7 @@ Vue.component('icon', Icon)
 
 Vue.use(VueLazyLoad, {
   preLoad: 2,
-  error: 'static/error.png',
+  error: 'http://images1.fanpop.com/images/image_uploads/Funny-Cat-Pictures-animal-humor-935491_500_375.jpg',
   loading: 'static/loading.png',
   attempt: 1
 })
