@@ -95,7 +95,7 @@ body {
 }
 
 .content-wrapper:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   animation: cat-click-animation 0.2s 0s 1 linear;
 }
 
@@ -103,9 +103,9 @@ body {
 }
 
 @keyframes cat-click-animation {
-  0% { transform: rotate(0deg) scale(1.5); }
-  50% { transform: rotate(30deg) scale(1.5); }
-  100% { transform: rotate(0deg) scale(1.5); }
+  0% { transform: rotate(0deg) scale(1.2); }
+  50% { transform: rotate(2deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1.2); }
 }
 
 * {
