@@ -8,13 +8,22 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
     <h1>{{album.title}}</h1>
     <div class="loading" v-if="showLoading">Loading...</div>
     <div class="error" v-if="showError">{{lastError}}</div>
-    <transition-group name="animated-list" tag="ul">
-      <li v-for="image in sortedImages" class="animated-list-item" v-bind:key="image.id">
-        <router-link :to="{ name: 'Image', params: { album_id: album.id, image_id: image.id }}">
-          <!-- Lazy loading of thumnail image -->
-          <img v-lazy="image.thumbnail_url"/>
-          Photographer: {{ image.photographer }}
-        </router-link>
+    <transition-group class="photo-grid" name="animated-list" tag="ul">
+      <li v-for="image in sortedImages" class="animated-list-item photo-wrapper" v-bind:key="image.id">
+        <div class="content-wrapper">
+          <router-link :to="{ name: 'Image', params: { album_id: album.id, image_id: image.id }}">
+            <!-- Lazy loading of thumnail image -->
+            <div class="image-wrapper">
+              <img v-lazy="image.thumbnail_url"/>
+            </div>
+            <div class="photo-description-wrapper">
+              <div class="photo-description">
+                <p class="photo-photographer">By: {{ image.photographer }}</p>
+                <p class="photo-date">{{ image.timestamp }}</p>
+              </div>
+            </div>
+          </router-link>
+        </div>
       </li>
     </transition-group>
   </div>
@@ -22,9 +31,88 @@ For more Vue template syntax see https://vuejs.org/v2/guide/syntax.html
 
 <!-- sass or css styling specific to this component -->
 <style lang="scss" scoped>
+.photo-grid {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 img {
-  width: 300px;
+  width: 100%;
   height: 225px;
+  float: left;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+.photo-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.photo-description-wrapper {
+  width: 100%;
+  height: 45px;
+  float: left;
+}
+
+.photo-description {
+  padding: 10px;
+  font-size: 18px;
+  color: black;
+}
+
+.photo-photographer {
+  float: left;
+  font-family: Roboto;
+  font-weight: 700;
+}
+
+.photo-date {
+  float: right;
+  color: #757575;
+}
+
+.photo-wrapper {
+  display: flex;
+  width: 300px;
+  float: left;
+  list-style-type: none;
+  padding: 35px;
+}
+
+.content-wrapper {
+  width: 100%;
+  height: 265px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  border-radius: 0 0 8px 8px;
+  -webkit-transition: transform 0.1s linear;
+}
+
+.content-wrapper:hover {
+  transform: scale(1.2);
+  animation: cat-click-animation 0.2s 0s 1 linear;
+}
+
+.content-wrapper:active {
+}
+
+@keyframes cat-click-animation {
+  0% { transform: rotate(0deg) scale(1.2); }
+  50% { transform: rotate(2deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1.2); }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
 }
 </style>
 
